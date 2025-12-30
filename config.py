@@ -1,5 +1,9 @@
 import os
 from typing import Literal
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 class Config:
     """Configuration for production and test environments"""
@@ -15,10 +19,13 @@ class Config:
                 raise ValueError("POSTGRES_URL environment variable is required in production mode")
         else:
             # Local test database
+            print("USING TEST DATABASE")
+            print(f"MODE = {mode}")
             self.database_url = os.getenv(
                 "TEST_DATABASE_URL",
                 "postgresql://localhost/course_management_test"
             )
+            print(f"DATABASE URL = {self.database_url}")
 
         # JWT Secret
         self.jwt_secret = os.getenv("JWT_SECRET", "dev-secret-key-change-in-production")

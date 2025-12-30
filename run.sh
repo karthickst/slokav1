@@ -17,6 +17,7 @@ source venv/bin/activate
 if [ ! -f .env ]; then
     echo "⚠️  .env file not found. Using default test configuration."
 fi
+. ./.env
 
 # Set default mode to test if not specified
 export APP_MODE=${APP_MODE:-test}
@@ -27,6 +28,7 @@ echo ""
 echo "Press Ctrl+C to stop the server"
 echo "=============================================="
 echo ""
+echo " ENV URL FOR DB : $TEST_DATABASE_URL"
 
 # Run the application
 python app.py
