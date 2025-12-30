@@ -32,6 +32,21 @@ python app.py
 
 Access at: http://localhost:8000
 
+### Stop the Application
+
+```bash
+# Make stop script executable
+chmod +x stop.sh
+
+# Stop the application
+./stop.sh
+```
+
+This will:
+- Find and stop all running app processes
+- Free up port 8000
+- Gracefully shutdown the server
+
 ## 3. Run Tests
 
 ```bash
@@ -99,6 +114,7 @@ slokav1/
 ├── test_app.py      # Tests
 ├── setup.sh         # Setup script
 ├── run.sh           # Run script
+├── stop.sh          # Stop script
 └── run_tests.sh     # Test script
 ```
 
@@ -110,7 +126,8 @@ slokav1/
 - Create database: `createdb course_management_test`
 
 **Port 8000 in use?**
-- Kill process: `lsof -ti:8000 | xargs kill -9`
+- Use stop script: `./stop.sh`
+- Or manually: `lsof -ti:8000 | xargs kill -9`
 - Or change port in app.py
 
 **Module not found?**
