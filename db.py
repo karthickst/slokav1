@@ -1,8 +1,8 @@
 import logging
 import traceback
 from typing import List, Optional, Dict, Any
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row
 from config import Config
 
 # Configure logging
@@ -25,11 +25,11 @@ class Database:
         """Establish database connection"""
         try:
             logger.info(f"Connecting to database: {self.config.database_url[:20]}...")
-            self.connection = psycopg2.connect(
+            self.connection = psycopg.connect(
                 self.config.database_url,
-                cursor_factory=RealDictCursor
+                row_factory=dict_row,
+                autocommit=False
             )
-            self.connection.autocommit = False
             logger.info("Database connection established successfully")
         except Exception as e:
             logger.error(f"Database connection failed: {str(e)}")
